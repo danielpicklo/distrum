@@ -23,6 +23,7 @@ import {
 } from "../ui/form"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
+import { FileUpload } from "../file-upload"
 
 const form_schema = z.object({
   name: z.string().min(1, { message: 'A server name is required.'}),
@@ -31,10 +32,10 @@ const form_schema = z.object({
 
 export const InitialModal = () => {
 
-  const [is_mounted, set_is_mounted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    set_is_mounted(true)
+    setIsMounted(true)
   }, [])
 
   const form = useForm({
@@ -45,13 +46,13 @@ export const InitialModal = () => {
     }
   })
 
-  const is_loading = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
 
-  const on_submit = async (values: z.infer<typeof form_schema>) => {
+  const onSubmit = async (values: z.infer<typeof form_schema>) => {
     console.log(values)
   }
 
-  if (!is_mounted){
+  if (!isMounted){
     return null
   }
 
@@ -63,9 +64,27 @@ export const InitialModal = () => {
           <DialogDescription className='text-center text-slate-800'>Give your server some personality!</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(on_submit)} className='space-y-8'>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <div className='space-y-8 px-6'>
-              <div className='flex items-center justify-center text-center'>IMAGE UPLOAD</div>
+              <div className='flex items-center justify-center text-center'>
+                
+                <FormField 
+                  control={form.control}
+                  name="imageUrl"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+              </div>
             </div>
             <div className='px-6'>
               <FormField 
@@ -76,7 +95,7 @@ export const InitialModal = () => {
                     <FormLabel className='uppercase text-xs font-bold text-slate-500 dark:text-secondary/70'>Server name</FormLabel>
                     <FormControl>
                       <Input 
-                        disabled={is_loading}
+                        disabled={isLoading}
                         className='bg-slate-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
                         placeholder='Enter server name'
                         {...field}
@@ -88,7 +107,7 @@ export const InitialModal = () => {
               />
             </div>
             <DialogFooter className='bg-slate-100 px-6 py-4'>
-              <Button disabled={is_loading} variant='primary'>Create</Button>
+              <Button disabled={isLoading} variant='primary'>Create</Button>
             </DialogFooter>
           </form>
         </Form>
