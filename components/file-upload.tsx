@@ -29,8 +29,15 @@ export const FileUpload = ({
           fill
           src={value}
           alt='upload'
-          className='rounded-full'
+          className='rounded-full relative relative-important upload-image'
         />
+        <button 
+          onClick={() => onChange('')}
+          className='bg-rose-300 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm'
+          type='button'
+        >
+          <X className='h-4 w-4'/>
+        </button>
       </div>
     )
   }

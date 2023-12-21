@@ -7,6 +7,16 @@ body,
 :root{
   height: 100%;
 }
+
+.relative.relative-important{
+  position: relative !important;
+}
+
+.upload-image{
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover;
+}
  
 @layer base {
   :root {
