@@ -47,6 +47,7 @@ export const NavigationItem = ({
             fill
             src={imageUrl}
             alt={name + ' channel'}
+            className='object-cover'
           />
         </div>
       </button>
