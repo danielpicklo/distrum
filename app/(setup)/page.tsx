@@ -22,7 +22,7 @@ const SetupPage = async () => {
 
   return ( 
     <div><InitialModal /></div>
-   );
+  );
 }
- 
+
 export default SetupPage;

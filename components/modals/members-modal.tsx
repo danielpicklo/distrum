@@ -29,10 +29,10 @@ import {
   User2,
   MoreVertical, 
   ShieldQuestion,
-  Shield,
   Check,
   Gavel,
-  Loader2
+  Loader2,
+  User
 } from "lucide-react"
 import { useState } from "react"
 import { MemberRole } from "@prisma/client"
@@ -138,7 +138,7 @@ export const MembersModal = () => {
                               onClick={() => onRoleChange(member.id, 'GUEST')}
                               className='cursor-pointer'
                             >
-                              <Shield className='w-4 h-4 mr-2' />
+                              <User className='w-4 h-4 mr-2' />
                               Guest
                               {member.role === 'GUEST' && (
                                 <Check className='w-4 h-4 ml-auto' />
